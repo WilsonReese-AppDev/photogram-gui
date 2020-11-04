@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def index
     matching_users = User.all
     @list_of_users = matching_users.order({ :username => :asc })
-    render({ :template => "user_templates/index.html.erb"})
+    render({ :template => "user_templates/index.html.erb" })
   end
 
   def show
@@ -11,6 +11,20 @@ class UsersController < ApplicationController
 
     @the_user = matching_usernames.first
 
-    render({ :template => "user_templates/show.html.erb"})
+    render({ :template => "user_templates/show.html.erb" })
   end
+
+  def add
+    # Parameters: {"query_username"=>"reese"}
+    input_username = params.fetch("query_username")
+
+    a_new_user = User.new
+    a_new_user.username = input_username
+
+    a_new_user.save
+
+    # render({ :template => "user_templates/add.html.erb" })
+    redirect_to("/users/" + a_new_user.username)
+  end
+  
 end
