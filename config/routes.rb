@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get("/photos/:path_id", { :controller => "photos", :action => "show" })
 
   get("/delete_photo/:path_id", { :controller => "photos", :action => "remove" })
+  get("/add_photo", { :controller => "photos", :action => "add"})
 end
