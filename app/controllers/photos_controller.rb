@@ -45,4 +45,22 @@ class PhotosController < ApplicationController
 
     redirect_to("/photos/" + a_new_photo.id.to_s)
   end
+
+  def update
+    # Parameters: {"query_image"=>"https://robohash.org/dolorehicincidunt.png?size=300x300&set=set1", "query_caption"=>"Once you’ve accepted your flaws, no one can use them against you.", "update_id"=>"777"}
+    updated_image = params.fetch("query_image")
+    updated_caption = params.fetch("query_caption")
+    the_id = params.fetch("update_id")
+
+    matching_photos = Photo.where({ :id => the_id })
+    the_photo = matching_photos.first
+
+    the_photo.image = updated_image
+    the_photo.caption = updated_caption
+
+    the_photo.save
+
+    # render({ :template => "photo_templates/update.html.erb" })
+    redirect_to("/photos/" + the_photo.id.to_s)
+  end
 end

@@ -5,7 +5,7 @@
     Image
   </dt>
   <dd>
-    <img src="<%= @the_photo %>">
+    <img src="<%= @the_photo.image %>">
   </dd>
   <dt>
     Caption
@@ -29,7 +29,18 @@
     Edit photo
   </dt>
   <dd>
-    Form goes here
+    <form action="/update_photo/<%= @the_photo.id %>">
+      <label for="image_box">Image</label>
+      <input id="image_box" 
+        name="query_image" 
+        placeholder="Enter a URL for the image..."
+        value="<%= @the_photo.image %>">
+
+      <label for="caption_box">Caption</label>
+      <textarea id="caption_box" name="query_caption" placeholder="Enter a caption for the photo..."><%= @the_photo.caption %></textarea>
+
+      <button>Update photo</button>
+    </form>
   </dd>
   <dt>
     Delete photo
@@ -68,4 +79,16 @@
 </table>
 
 <h3>Add a new comment</h3>
-Comment form goes here
+<form action="/insert_comment_record">
+  <label for="browser_photo_id">Photo ID</label>
+  <input id="browser_photo_id" type="text" value="<%= @the_photo.id %>" name="query_photo_id">
+
+  <label for="browser_author_id">Author ID</label>
+  <input id="browser_author_id" type="text" name="query_author_id">
+
+  <label for="browser_comment">Comment</label>
+  <textarea id="browser_comment" name="query_body" placeholder="Enter a comment..."></textarea>
+
+  <button>Add comment</button>
+</form>
+
